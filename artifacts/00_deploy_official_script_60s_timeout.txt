@@ -1,0 +1,34 @@
+stable: Pulling from ytsaurus/local
+Digest: sha256:6f0991f7c85b4824bebead742fa4d752c3508532c013ffcb778a1b14c0b50b22
+Status: Image is up to date for ghcr.io/ytsaurus/local:stable
+ghcr.io/ytsaurus/local:stable
+stable: Pulling from ytsaurus/ui
+Digest: sha256:00648e3917c80c4b372765b79b9434203fd8ca34b4a35b3bf49a87fbb767120a
+Status: Image is up to date for ghcr.io/ytsaurus/ui:stable
+ghcr.io/ytsaurus/ui:stable
+Creating network yt_local_cluster_network
+e7a62df8e4cebde74ea075534f466d8f45f3987a99a79577254a1b84af78209b
+Wait until yt.backend is ready...
+2026-09-16 14:01:57,360 INFO Start preparing cluster instance as follows:
+2026-09-16 14:01:57,377 INFO   masters              1 (0 nonvoting) (version: 25.4.260522002-local-os~18a0a1c3751b449a+distbuild)
+2026-09-16 14:01:57,377 INFO   nodes                1 (0 chaos)     (version: 25.4.260522002-local-os~18a0a1c3751b449a+distbuild)
+2026-09-16 14:01:57,377 INFO   schedulers           1               (version: 25.4.260522002-local-os~18a0a1c3751b449a+distbuild)
+2026-09-16 14:01:57,378 INFO   controller agents    1               (version: 25.4.260522002-local-os~18a0a1c3751b449a+distbuild)
+2026-09-16 14:01:57,378 INFO   queue agents         1               (version: 25.4.260522002-local-os~18a0a1c3751b449a+distbuild)
+2026-09-16 14:01:57,379 INFO   HTTP proxies         1               (version: 25.4.260522002-local-os~18a0a1c3751b449a+distbuild)
+2026-09-16 14:01:57,379 INFO   working dir          /tmp/locasaurus
+2026-09-16 14:01:57,380 INFO Preparing directories
+2026-09-16 14:01:57,389 INFO Preparing configs
+2026-09-16 14:01:57,487 INFO Finished preparing cluster instance
+2026-09-16 14:01:59,532 INFO Starting http_proxy
+2026-09-16 14:01:59,592 INFO Process http_proxy started (pid: 56, current_process_pid: 1)
+2026-09-16 14:01:59,593 INFO Starting master
+2026-09-16 14:01:59,618 INFO Process master started (pid: 57, current_process_pid: 1)
+2026-09-16 14:01:59,619 INFO Starting queue_agent
+2026-09-16 14:01:59,660 INFO Process queue_agent started (pid: 58, current_process_pid: 1)
+2026-09-16 14:01:59,807 INFO Waiting for http_proxy...
+2026-09-16 14:02:11,197 INFO Http_proxy ready
+2026-09-16 14:02:11,199 INFO Waiting for master...
+
+Error: yt.backend has not started in 60 seconds, see output of 'docker logs yt.backend' above
+

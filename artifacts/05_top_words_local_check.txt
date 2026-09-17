@@ -1,0 +1,12 @@
+== local cross-check of Word Count (same regex \w+ as mapreduce/word-count.py) ==
+distinct words: 3208
+and 490
+the 438
+to 415
+my 372
+of 370
+i 352
+in 323
+that 323
+thy 267
+thou 235

@@ -1,0 +1,27 @@
++ python3 data/prepare_text.py
+lines: 2620 (cached)
++ yt create table //home/mbogomazov/sonnets --force --attributes '{schema = [{name = lineno; type = string}; {name = text; type = string}]}'
+9-666a-10191-1d7a8e8e
++ yt create table //home/mbogomazov/word_count --force --attributes '{schema = [{name = count; type = string}; {name = word; type = string}]}'
+9-668c-10191-82b39e5d
++ yt write-table //home/mbogomazov/sonnets --format dsv
++ yt read-table '//home/mbogomazov/sonnets[:#10]' --format dsv
+lineno=1	text=THE SONNETS
+lineno=2	text=
+lineno=3	text=by William Shakespeare
+lineno=4	text=
+lineno=5	text=I
+lineno=6	text=
+lineno=7	text=From fairest creatures we desire increase,
+lineno=8	text=That thereby beauty's rose might never die,
+lineno=9	text=But as the riper should by time decease,
+lineno=10	text=His tender heir might bear his memory:
++ yt map-reduce --mapper 'python3 word-count.py map' --reducer 'python3 word-count.py reduce' --map-local-file mapreduce/word-count.py --reduce-local-file mapreduce/word-count.py --src //home/mbogomazov/sonnets --dst //home/mbogomazov/word_count --reduce-by word --format dsv
+2026-09-17 17:06:49,947	INFO	Operation started: http://localhost:18000/ui/?page=operation&mode=detail&id=b1d75ab3-b78c3691-103e8-86131781&tab=details
+2026-09-17 17:06:49,970	INFO	( 0 min) operation b1d75ab3-b78c3691-103e8-86131781 starting
+2026-09-17 17:06:51,142	INFO	( 0 min) operation b1d75ab3-b78c3691-103e8-86131781 initializing
+2026-09-17 17:06:51,665	INFO	( 0 min) Unrecognized spec: {'job_io': {'table_writer': {'enable_large_columnar_statistics': true}}, 'locality_timeout': 100, 'mapper': {'title': 'python3'}, 'reducer': {'title': 'python3'}}
+2026-09-17 17:06:52,724	INFO	( 0 min) operation b1d75ab3-b78c3691-103e8-86131781: running=0     completed=0     pending=1     failed=0     aborted=0     lost=0     total=1     blocked=0    
+2026-09-17 17:06:55,521	INFO	( 0 min) operation b1d75ab3-b78c3691-103e8-86131781: running=1     completed=0     pending=0     failed=0     aborted=0     lost=0     total=1     blocked=0    
+2026-09-17 17:07:08,958	INFO	( 0 min) operation b1d75ab3-b78c3691-103e8-86131781: running=1     completed=1     pending=0     failed=0     aborted=0     lost=0     total=2     blocked=0    
+2026-09-17 17:07:20,958	INFO	( 0 min) operation b1d75ab3-b78c3691-103e8-86131781 completed

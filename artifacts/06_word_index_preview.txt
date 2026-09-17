@@ -1,0 +1,28 @@
+===== yql/word_index_preview.yql =====
+-- Preview of the search index built by mapreduce/word_index.py: a few words with their line numbers.
+USE locasaurus;
+PRAGMA yt.DefaultMemoryLimit = "2G";  -- see yql/top_words.yql
+
+SELECT word, ListLength(lines) AS lines_count, lines
+FROM `//home/mbogomazov/word_index`
+WHERE word IN ("fairest", "increase", "desire", "creatures", "abundance", "feed'st", "beauty's", "sonnets")
+ORDER BY word;
+===== result =====
+2026-09-17 17:08:45,493	INFO	Query started: http://localhost:18000/queries/88747791-6ec3b21a-a965d95e-89ec560a
+2026-09-17 17:08:45,513	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a pending
+2026-09-17 17:08:47,107	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a: running=0     completed=0     pending=0     failed=0     aborted=0     lost=0     total=0    
+2026-09-17 17:08:56,587	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a: running=0     completed=0     pending=1     failed=0     aborted=0     lost=0     total=1    
+2026-09-17 17:08:58,639	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a: running=1     completed=0     pending=0     failed=0     aborted=0     lost=0     total=1    
+2026-09-17 17:09:11,259	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a: running=0     completed=1     pending=0     failed=0     aborted=0     lost=0     total=1    
+2026-09-17 17:09:19,462	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a: running=0     completed=1     pending=1     failed=0     aborted=0     lost=0     total=2    
+2026-09-17 17:09:22,945	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a: running=0     completed=2     pending=0     failed=0     aborted=0     lost=0     total=2    
+2026-09-17 17:09:28,267	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a completing
+2026-09-17 17:09:28,922	INFO	( 0 min) query 88747791-6ec3b21a-a965d95e-89ec560a completed
+{"word":"abundance","lines_count":4,"lines":[13,384,629,2293]}
+{"word":"beauty's","lines_count":18,"lines":[8,25,32,59,85,95,153,241,324,399,1019,1153,1615,1714,1772,1797,2149,2150]}
+{"word":"creatures","lines_count":2,"lines":[7,2421]}
+{"word":"desire","lines_count":11,"lines":[7,167,757,865,866,960,1029,2088,2392,2495,2613]}
+{"word":"fairest","lines_count":5,"lines":[7,1794,2219,2227,2611]}
+{"word":"feed'st","lines_count":1,"lines":[12]}
+{"word":"increase","lines_count":4,"lines":[7,181,249,1644]}
+{"word":"sonnets","lines_count":1,"lines":[1]}

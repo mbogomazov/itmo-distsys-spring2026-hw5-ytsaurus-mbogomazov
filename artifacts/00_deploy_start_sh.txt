@@ -1,0 +1,17 @@
+stable: Pulling from ytsaurus/local
+Digest: sha256:6f0991f7c85b4824bebead742fa4d752c3508532c013ffcb778a1b14c0b50b22
+Status: Image is up to date for ghcr.io/ytsaurus/local:stable
+ghcr.io/ytsaurus/local:stable
+stable: Pulling from ytsaurus/ui
+Digest: sha256:00648e3917c80c4b372765b79b9434203fd8ca34b4a35b3bf49a87fbb767120a
+Status: Image is up to date for ghcr.io/ytsaurus/ui:stable
+ghcr.io/ytsaurus/ui:stable
+590585e8459370634ca03e537985e43c290cfff8cbaf8fa52ef7b936e2c93335
+Waiting for yt.backend (usually 4-5 minutes under emulation)...
+yt.backend is ready
+f15581fff2e462c591409bd8cdb0641d6706795bbfd774d4b460e671c2eaa249
+
+Local cluster is up.
+  Web UI: http://localhost:18001
+  CLI:    source deploy/env.sh && yt list //home
+./deploy/start.sh  0,86s user 0,94s system 1% cpu 1:29,78 total

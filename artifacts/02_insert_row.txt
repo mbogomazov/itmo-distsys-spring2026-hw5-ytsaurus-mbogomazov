@@ -1,0 +1,8 @@
++ echo '{"author": "William Shakespeare", "title": "Sonnets", "year": 1609, "pages": 154}
+{"author": "William Shakespeare", "title": "Hamlet", "year": 1603, "pages": 200}
+{"author": "Lewis Carroll", "title": "Alice in Wonderland", "year": 1865, "pages": 96}'
++ yt insert-rows //home/mbogomazov/books --format json
++ yt select-rows '* from [//home/mbogomazov/books]' --format json
+{"author":"Lewis Carroll","title":"Alice in Wonderland","year":1865,"pages":96}
+{"author":"William Shakespeare","title":"Hamlet","year":1603,"pages":200}
+{"author":"William Shakespeare","title":"Sonnets","year":1609,"pages":154}

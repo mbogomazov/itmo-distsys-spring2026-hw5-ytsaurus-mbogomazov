@@ -1,0 +1,35 @@
++ python3 mapreduce/word_index.py map
++ LC_ALL=C
++ sort '-t	' -k1,1
++ python3 mapreduce/word_index.py reduce
++ grep -E '"word": "(fairest|increase)"' artifacts/word_index_local.jsonl
+{"word": "fairest", "lines": [7, 1794, 2219, 2227, 2611]}
+{"word": "increase", "lines": [7, 181, 249, 1644]}
++ yt create table //home/mbogomazov/word_index --force --attributes '{schema = [
+    {name = word;  type = string};
+    {name = lines; type_v3 = {type_name = list; item = int64}}
+]}'
+9-8eb5-10191-8a675bdd
++ yt map-reduce --mapper 'python3 word_index.py map' --reducer 'python3 word_index.py reduce' --map-local-file mapreduce/word_index.py --reduce-local-file mapreduce/word_index.py --src //home/mbogomazov/sonnets --dst //home/mbogomazov/word_index --reduce-by word --map-input-format dsv --map-output-format dsv --reduce-input-format dsv --reduce-output-format json
+2026-09-17 17:08:21,911	INFO	Operation started: http://localhost:18000/ui/?page=operation&mode=detail&id=840eb82a-84d6b8f9-103e8-801deb5f&tab=details
+2026-09-17 17:08:21,922	INFO	( 0 min) operation 840eb82a-84d6b8f9-103e8-801deb5f starting
+2026-09-17 17:08:22,439	INFO	( 0 min) operation 840eb82a-84d6b8f9-103e8-801deb5f initializing
+2026-09-17 17:08:22,984	INFO	( 0 min) Unrecognized spec: {'job_io': {'table_writer': {'enable_large_columnar_statistics': true}}, 'locality_timeout': 100, 'mapper': {'title': 'python3'}, 'reducer': {'title': 'python3'}}
+2026-09-17 17:08:23,526	INFO	( 0 min) operation 840eb82a-84d6b8f9-103e8-801deb5f: running=0     completed=0     pending=1     failed=0     aborted=0     lost=0     total=1     blocked=0    
+2026-09-17 17:08:26,689	INFO	( 0 min) operation 840eb82a-84d6b8f9-103e8-801deb5f: running=1     completed=0     pending=0     failed=0     aborted=0     lost=0     total=1     blocked=0    
+2026-09-17 17:08:37,656	INFO	( 0 min) operation 840eb82a-84d6b8f9-103e8-801deb5f: running=1     completed=1     pending=0     failed=0     aborted=0     lost=0     total=2     blocked=0    
+2026-09-17 17:08:40,271	INFO	( 0 min) operation 840eb82a-84d6b8f9-103e8-801deb5f: running=0     completed=2     pending=0     failed=0     aborted=0     lost=0     total=2     blocked=0    
+2026-09-17 17:08:43,411	INFO	( 0 min) operation 840eb82a-84d6b8f9-103e8-801deb5f completed
++ yt get //home/mbogomazov/word_index/@row_count
+3352
++ yt read-table '//home/mbogomazov/word_index[:#10]' --format json
+{"word":"a","lines":[13,27,65,84,122,143,146,219,224,246,262,281,289,296,299,330,332,336,338,339,348,351,422,424,451,454,459,502,507,521,544,551,568,574,595,607,619,630,661,680,693,698,707,772,777,781,789,791,796,819,850,912,949,969,971,996,997,1069,1090,1097,1098,1113,1149,1152,1158,1183,1187,1258,1268,1274,1287,1310,1323,1338,1351,1360,1373,1389,1404,1407,1412,1428,1430,1457,1481,1482,1491,1494,1508,1525,1526,1527,1542,1560,1564,1572,1606,1611,1613,1626,1631,1639,1651,1658,1682,1685,1701,1718,1743,1747,1767,1781,1800,1813,1862,1872,1882,1886,1935,1958,2003,2007,2036,2037,2043,2085,2128,2151,2159,2182,2188,2192,2193,2208,2209,2225,2257,2277,2308,2312,2326,2329,2387,2396,2420,2439,2440,2443,2464,2475,2488,2586,2591,2593,2595,2596,2597,2601,2614,2615,2617]}
+{"word":"abhor","lines":[2549,2550]}
+{"word":"abide","lines":[453,756]}
+{"word":"able","lines":[1441]}
+{"word":"about","lines":[1913]}
+{"word":"above","lines":[1457,1542,1866,2067]}
+{"word":"absence","lines":[661,965,981,1639,1845]}
+{"word":"absent","lines":[688,758,1511,1656]}
+{"word":"abundance","lines":[13,384,629,2293]}
+{"word":"abundant","lines":[1647]}

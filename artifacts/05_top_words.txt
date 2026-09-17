@@ -1,0 +1,57 @@
+===== yql/top_words.yql =====
+-- Top-30 most frequent words of Shakespeare's Sonnets (result of the Word Count MapReduce job).
+-- Column `count` is a String (schema from the tutorial), so we cast it to a number before sorting,
+-- otherwise "99" > "1000" in string order.
+USE locasaurus;  -- cluster name of the local installation (//sys/@cluster_name)
+-- Local cluster runs under x86 emulation (Rosetta) on Apple M1: YQL jobs use a bit more RAM than
+-- the default limit (~520 MB) and fail with "Memory limit exceeded", so we raise the limit.
+PRAGMA yt.DefaultMemoryLimit = "2G";
+
+SELECT
+    word,
+    CAST(count AS Uint64) AS cnt
+FROM `//home/mbogomazov/word_count`
+ORDER BY cnt DESC, word
+LIMIT 30;
+===== result =====
+2026-09-17 17:07:22,924	INFO	Query started: http://localhost:18000/queries/9e125d65-844c1108-469af4e9-86a6a397
+2026-09-17 17:07:22,954	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397 pending
+2026-09-17 17:07:24,311	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397: running=0     completed=0     pending=0     failed=0     aborted=0     lost=0     total=0    
+2026-09-17 17:07:31,743	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397: running=0     completed=0     pending=1     failed=0     aborted=0     lost=0     total=1    
+2026-09-17 17:07:35,547	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397: running=1     completed=0     pending=0     failed=0     aborted=0     lost=0     total=1    
+2026-09-17 17:07:53,642	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397: running=0     completed=1     pending=0     failed=0     aborted=0     lost=0     total=1    
+2026-09-17 17:08:07,795	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397: running=0     completed=1     pending=1     failed=0     aborted=0     lost=0     total=2    
+2026-09-17 17:08:10,379	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397: running=1     completed=1     pending=0     failed=0     aborted=0     lost=0     total=2    
+2026-09-17 17:08:14,666	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397: running=0     completed=2     pending=0     failed=0     aborted=0     lost=0     total=2    
+2026-09-17 17:08:20,298	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397 completing
+2026-09-17 17:08:20,422	INFO	( 0 min) query 9e125d65-844c1108-469af4e9-86a6a397 completed
+{"word":"and","cnt":490}
+{"word":"the","cnt":438}
+{"word":"to","cnt":415}
+{"word":"my","cnt":372}
+{"word":"of","cnt":370}
+{"word":"i","cnt":352}
+{"word":"in","cnt":323}
+{"word":"that","cnt":323}
+{"word":"thy","cnt":267}
+{"word":"thou","cnt":235}
+{"word":"d","cnt":234}
+{"word":"s","cnt":203}
+{"word":"love","cnt":195}
+{"word":"with","cnt":181}
+{"word":"for","cnt":172}
+{"word":"is","cnt":170}
+{"word":"not","cnt":167}
+{"word":"a","cnt":164}
+{"word":"me","cnt":164}
+{"word":"but","cnt":163}
+{"word":"thee","cnt":162}
+{"word":"so","cnt":145}
+{"word":"be","cnt":141}
+{"word":"as","cnt":121}
+{"word":"all","cnt":120}
+{"word":"you","cnt":113}
+{"word":"which","cnt":108}
+{"word":"his","cnt":107}
+{"word":"when","cnt":106}
+{"word":"this","cnt":105}

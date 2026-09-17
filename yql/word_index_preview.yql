@@ -1,0 +1,8 @@
+-- Preview of the search index built by mapreduce/word_index.py: a few words with their line numbers.
+USE locasaurus;
+PRAGMA yt.DefaultMemoryLimit = "2G";  -- see yql/top_words.yql
+
+SELECT word, ListLength(lines) AS lines_count, lines
+FROM `//home/mbogomazov/word_index`
+WHERE word IN ("fairest", "increase", "desire", "creatures", "abundance", "feed'st", "beauty's", "sonnets")
+ORDER BY word;

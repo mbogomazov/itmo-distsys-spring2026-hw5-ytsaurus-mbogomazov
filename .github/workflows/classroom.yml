@@ -1,0 +1,33 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Check readiness to validate
+      id: check-readiness-to-validate
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Check readiness to validate
+        setup-command: ''
+        command: cat READY_TO_CHECK.TXT
+        input: ''
+        expected-output: 'YES'
+        comparison-method: contains
+        timeout: 1
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        CHECK-READINESS-TO-VALIDATE_RESULTS: "${{steps.check-readiness-to-validate.outputs.result}}"
+      with:
+        runners: check-readiness-to-validate

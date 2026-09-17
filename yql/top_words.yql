@@ -1,0 +1,14 @@
+-- Top-30 most frequent words of Shakespeare's Sonnets (result of the Word Count MapReduce job).
+-- Column `count` is a String (schema from the tutorial), so we cast it to a number before sorting,
+-- otherwise "99" > "1000" in string order.
+USE locasaurus;  -- cluster name of the local installation (//sys/@cluster_name)
+-- Local cluster runs under x86 emulation (Rosetta) on Apple M1: YQL jobs use a bit more RAM than
+-- the default limit (~520 MB) and fail with "Memory limit exceeded", so we raise the limit.
+PRAGMA yt.DefaultMemoryLimit = "2G";
+
+SELECT
+    word,
+    CAST(count AS Uint64) AS cnt
+FROM `//home/mbogomazov/word_count`
+ORDER BY cnt DESC, word
+LIMIT 30;

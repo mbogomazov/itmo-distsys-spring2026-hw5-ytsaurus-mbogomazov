@@ -1,0 +1,5 @@
+== local cross-check: line 7 of data/sonnets.txt ==
+$ sed -n 7p data/sonnets.txt
+From fairest creatures we desire increase,
+$ python3 -c "...same normalization as word_index.py..."
+['creatures', 'desire', 'fairest', 'from', 'increase', 'we']

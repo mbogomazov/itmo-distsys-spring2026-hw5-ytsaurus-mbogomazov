@@ -1,0 +1,17 @@
++ yt create map_node //home/mbogomazov --ignore-existing
+9-64d6-1012f-76e07a66
++ yt create table //home/mbogomazov/books --attributes '{
+    dynamic = %true;
+    schema = [
+        {name = author; type = utf8;   sort_order = ascending};
+        {name = title;  type = utf8;   sort_order = ascending};
+        {name = year;   type = uint32};
+        {name = pages;  type = uint32}
+    ]
+}'
+9-6502-10191-d07f9312
++ yt mount-table //home/mbogomazov/books --sync
++ yt get //home/mbogomazov/books/@schema --format json
+{"$attributes":{"strict":true,"unique_keys":true},"$value":[{"name":"author","required":false,"sort_order":"ascending","type":"utf8","type_v3":{"type_name":"optional","item":"utf8"}},{"name":"title","required":false,"sort_order":"ascending","type":"utf8","type_v3":{"type_name":"optional","item":"utf8"}},{"name":"year","required":false,"type":"uint32","type_v3":{"type_name":"optional","item":"uint32"}},{"name":"pages","required":false,"type":"uint32","type_v3":{"type_name":"optional","item":"uint32"}}]}
++ yt get //home/mbogomazov/books/@tablet_state
+"mounted"

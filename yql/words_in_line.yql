@@ -1,0 +1,19 @@
+-- Reverse lookup in the search index built by mapreduce/word_index.py:
+-- which words does line number 7 contain?
+--
+-- Table //home/mbogomazov/word_index has columns
+--   word  : String
+--   lines : List<Int64>   -- sorted unique line numbers where the word occurs
+-- A word belongs to line 7  <=>  7 is an element of its `lines` list  ->  ListHas(lines, 7).
+--
+-- Equivalent variant with "unrolling" the list (one row per (word, line) pair):
+--   SELECT word FROM `//home/mbogomazov/word_index` FLATTEN LIST BY lines AS line WHERE line = 7;
+USE locasaurus;
+PRAGMA yt.DefaultMemoryLimit = "2G";  -- see comment in yql/top_words.yql (emulation on Apple M1)
+
+$line_number = 7;  -- named expression (like a constant)
+
+SELECT word
+FROM `//home/mbogomazov/word_index`
+WHERE ListHas(lines, $line_number)
+ORDER BY word;

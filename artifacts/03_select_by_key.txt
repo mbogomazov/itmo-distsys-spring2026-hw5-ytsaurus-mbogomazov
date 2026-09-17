@@ -1,0 +1,5 @@
++ echo '{"author": "William Shakespeare", "title": "Sonnets"}'
++ yt lookup-rows //home/mbogomazov/books --format json
+{"author":"William Shakespeare","title":"Sonnets","year":1609,"pages":154}
++ yt select-rows '* from [//home/mbogomazov/books] where author = "William Shakespeare" and title = "Sonnets"' --format json
+{"author":"William Shakespeare","title":"Sonnets","year":1609,"pages":154}

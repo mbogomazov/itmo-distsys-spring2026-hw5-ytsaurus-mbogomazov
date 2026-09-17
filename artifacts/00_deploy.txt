@@ -1,0 +1,46 @@
+$ docker ps --filter name=yt.
+NAMES         IMAGE                           STATUS         PORTS
+yt.frontend   ghcr.io/ytsaurus/ui:stable      Up 6 minutes   0.0.0.0:18001->80/tcp, [::]:18001->80/tcp
+yt.backend    ghcr.io/ytsaurus/local:stable   Up 9 minutes   0.0.0.0:18002->18002/tcp, [::]:18002->18002/tcp, 0.0.0.0:18000->80/tcp, [::]:18000->80/tcp
+
+$ docker logs yt.backend | grep -E "ready|started"
+2026-09-17 14:01:29,646 INFO Process http_proxy started (pid: 57, current_process_pid: 1)
+2026-09-17 14:01:29,656 INFO Process master started (pid: 58, current_process_pid: 1)
+2026-09-17 14:01:41,694 INFO Http_proxy ready
+2026-09-17 14:02:18,923 INFO Master ready
+2026-09-17 14:02:19,346 INFO Process node started (pid: 276, current_process_pid: 1)
+2026-09-17 14:02:20,710 INFO Process scheduler started (pid: 285, current_process_pid: 1)
+2026-09-17 14:02:20,865 INFO Process controller_agent started (pid: 286, current_process_pid: 1)
+2026-09-17 14:02:40,610 INFO Node ready
+2026-09-17 14:03:02,397 INFO Scheduler ready
+2026-09-17 14:03:02,530 INFO Controller_agent ready
+2026-09-17 14:03:02,643 INFO Process watcher started (pid: 842, current_process_pid: 1)
+2026-09-17 14:03:03,553 INFO Watcher started
+2026-09-17 14:03:03,554 INFO Environment started
+2026-09-17 14:03:04,309 INFO Restart: create('user',) already done, skipping
+2026-09-17 14:03:04,389 INFO Restart: add_member('query_tracker',) already done, skipping
+2026-09-17 14:03:04,570 INFO Process query_tracker started (pid: 843, current_process_pid: 1)
+2026-09-17 14:03:19,609 INFO Query tracker started
+2026-09-17 14:03:19,759 INFO Restart: create('user',) already done, skipping
+2026-09-17 14:03:19,820 INFO Restart: add_member('yql_agent',) already done, skipping
+2026-09-17 14:03:20,264 INFO Process yql_agent started (pid: 906, current_process_pid: 1)
+2026-09-17 14:03:20,271 INFO Yql agent started
+2026-09-17 14:03:20,271 INFO Waiting for query tracker to become ready
+2026-09-17 14:03:23,413 INFO Query tracker ready
+2026-09-17 14:03:23,419 INFO Initialization for query tracker started
+2026-09-17 14:03:23,533 INFO Restart: create('access_control_object_namespace',) already done, skipping
+2026-09-17 14:03:23,602 INFO Restart: create('access_control_object',) already done, skipping
+2026-09-17 14:03:23,653 INFO Restart: create('access_control_object',) already done, skipping
+2026-09-17 14:03:23,804 INFO Restart: create('access_control_object',) already done, skipping
+2026-09-17 14:03:23,806 INFO Waiting for yql agent to become ready
+2026-09-17 14:04:21,202 INFO Yql agent ready
+2026-09-17 14:04:21,203 INFO Initialization for yql agent started
+2026-09-17 14:04:33,844 INFO Local YT started, id: locasaurus
+
+$ source deploy/env.sh && yt list //home
+mbogomazov
+$ yt list //home/mbogomazov
+books
+sonnets
+word_count
+word_index
